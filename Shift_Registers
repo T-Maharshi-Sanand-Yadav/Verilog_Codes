@@ -1,0 +1,83 @@
+shift_right_register_4_bit_dff
+
+Step 1: Write Verilog Code of DFF using Positive Edge Trigger
+
+module DFF_POSEDGE_TRIGGER(q,qbar,d,clk);
+output reg q=1'b0;
+output reg qbar=1'b1;
+input d,clk;
+always@(posedge clk)
+if (clk==0)
+begin
+q=q;
+qbar=qbar;
+end
+
+else if ((d==0)&(clk==1))
+begin
+	q=0;
+	qbar=1;
+end
+	
+else 
+begin
+	q=1;
+	qbar=0;
+end
+
+endmodule
+
+
+Step 2: Write Verilog Code of 4-Bit Shift Right Register using D-FF
+
+module shift_right_register_4_bit_dff(q,qbar,d,clk,serial_input,serial_output);
+output [3:0]q,qbar;
+output serial_output;
+input [3:0]d;
+input clk;
+input [3:0]serial_input;
+DFF_POSEDGE_TRIGGER dff0(q[0],qbar[0],d[0]==serial_input,clk);
+DFF_POSEDGE_TRIGGER dff1(q[1],qbar[1],d[1]==q[0],clk);
+DFF_POSEDGE_TRIGGER dff2(q[2],qbar[2],d[2]==q[1],clk);
+DFF_POSEDGE_TRIGGER dff3(q[3],qbar[3],d[3]==q[2],clk);
+assign serial_output=q[3];
+endmodule
+
+Step 3: Test Bench 
+
+module shift_right_register_4_bit_dff_tb;
+
+	// Inputs
+	reg [3:0] d;
+	reg clk;
+	reg [3:0] serial_input;
+
+	// Outputs
+	wire [3:0] q;
+	wire [3:0] qbar;
+	wire serial_output;
+
+	// Instantiate the Unit Under Test (UUT)
+	shift_right_register_4_bit_dff uut (
+		.q(q), 
+		.qbar(qbar), 
+		.d(d), 
+		.clk(clk), 
+		.serial_input(serial_input), 
+		.serial_output(serial_output)
+	);
+
+	initial 
+	begin
+	$monitor($time,"clk=%b,serial_input=%b,q=%b,d=%b,serial_output=%b,qbar=%b",clk,serial_input,q,d,serial_output,qbar);
+		// Initialize Inputs
+		d = 4'b1111;
+		clk = 0;
+		   
+	end
+	always #5 clk = clk + 1;
+	
+   
+endmodule
+
+..........................................................................................................................................................
