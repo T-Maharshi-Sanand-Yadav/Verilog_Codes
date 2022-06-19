@@ -1179,6 +1179,335 @@ Finished circuit initialization process.
 ISim>  
 	
 ..........................................................................................................................................................	
+UNIVERSAL SHIFT REGISTER 8-BIT
+
+LOGIC DIAGRAM:
+	https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/Universal%20Shift%20Register%204-bit%20Logic%20Diagram.jpeg
+
+STEP 1: WRITE VERILOG CODE FOR 4X1 MULTIPLEXER
+		module mux_4_1_dataflowmodelling(out,i3,i2,i1,i0,s1,s0);
+		output out;
+		input i3,i2,i1,i0,s1,s0;
+		assign out=((~s1&~s0&i0)|(~s1&s0&i1)|(s1&~s0&i2)|(s1&s0&i3));
+		endmodule
+STEP 2: WRITE VERILOG CODE FOR DFF_POSEDGE_TRIGGER
+		module DFF_POSEDGE_TRIGGER(q,qbar,d,clk);
+		output reg q=1'b0;
+		output reg qbar=1'b1;
+		input d,clk;
+		always@(posedge clk)
+		begin
+			if(clk==0)
+				begin
+					q=q;
+					qbar=qbar;
+				end
+
+			else if((d==0)&(clk==1))
+				begin
+					q=0;
+					qbar=1;
+				end
+
+			else 
+				begin
+					q=1;
+					qbar=0;
+				end
+		end
+		endmodule
+STEP 3: WRITE VERILOG CODE FOR UNIVERSAL SHIFT REGISTER 8-BIT
+	
+	module universal_shift_register_8_bit(a,i,clk,s,serial_input_for_shift_right,serial_input_for_shift_left);
+	parameter N=8;
+	output [N-1:0]a;
+	input [N-1:0]i;
+	input clk;
+	input [1:0]s;
+	input serial_input_for_shift_right;
+	input serial_input_for_shift_left;
+	wire [N-1:0]out;
+
+	mux_4_1_dataflowmodelling MUL_7(out[N-1],i[N-1],a[N-2],serial_input_for_shift_right,a[N-1],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_6(out[N-2],i[N-2],a[N-3],a[N-1],a[N-2],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_5(out[N-3],i[N-3],a[N-4],a[N-2],a[N-3],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_4(out[N-4],i[N-4],a[N-5],a[N-3],a[N-4],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_3(out[N-5],i[N-5],a[N-6],a[N-4],a[N-5],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_2(out[N-6],i[N-6],a[N-7],a[N-5],a[N-6],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_1(out[N-7],i[N-7],a[N-8],a[N-6],a[N-7],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_0(out[N-8],i[N-8],serial_input_for_shift_left ,a[N-7],a[N-8],s[1],s[0]);
+
+
+	DFF_POSEDGE_TRIGGER DFF_7(a[N-1],/*qbar*/,out[N-1],clk);
+	DFF_POSEDGE_TRIGGER DFF_6(a[N-2],/*qbar*/,out[N-2],clk);
+	DFF_POSEDGE_TRIGGER DFF_5(a[N-3],/*qbar*/,out[N-3],clk);
+	DFF_POSEDGE_TRIGGER DFF_4(a[N-4],/*qbar*/,out[N-4],clk);
+	DFF_POSEDGE_TRIGGER DFF_3(a[N-5],/*qbar*/,out[N-5],clk);
+	DFF_POSEDGE_TRIGGER DFF_2(a[N-6],/*qbar*/,out[N-6],clk);
+	DFF_POSEDGE_TRIGGER DFF_1(a[N-7],/*qbar*/,out[N-7],clk);
+	DFF_POSEDGE_TRIGGER DFF_0(a[N-8],/*qbar*/,out[N-8],clk);
+
+	endmodule
+	
+STEP 4: WRITE TEST BENCH FOR UNIVERSAL SHIFT REGISTER 8-BIT
+	module universal_shift_register_8_bit_tb;
+
+		// Inputs
+		reg [7:0] i;
+		reg clk;
+		reg [1:0] s;
+		reg serial_input_for_shift_right;
+		reg serial_input_for_shift_left;
+
+		// Outputs
+		wire [7:0] a;
+
+		// Instantiate the Unit Under Test (UUT)
+		universal_shift_register_8_bit uut (
+			.a(a), 
+			.i(i), 
+			.clk(clk), 
+			.s(s), 
+			.serial_input_for_shift_right(serial_input_for_shift_right), 
+			.serial_input_for_shift_left(serial_input_for_shift_left)
+		);
+
+		initial 
+		begin
+		$monitor($time,"clk=%b,s=%b,i=%b,serial_input_for_shift_right=%b,serial_input_for_shift_left=%b,a=%b",clk,s,i,serial_input_for_shift_right,serial_input_for_shift_left,a);
+			// Initialize Inputs
+			i = 0;
+			clk = 0;
+			s = 0;
+			serial_input_for_shift_right = 0;
+			serial_input_for_shift_left = 1;
+
+		end
+		always #80 s = s + 1;
+		always #80 serial_input_for_shift_right = serial_input_for_shift_right + 1;
+		always #160 serial_input_for_shift_left = serial_input_for_shift_left + 1;
+		always #5 clk = clk + 1;
+		always #245 i = i + 1;
+
+	endmodule
+	
+STEP 5:
+	WAVEFORM:
+		https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/Universal%20Shift%20Register%204-bit%20When%20Shift%20Right%20is%201.png
+	
+STEP 6:
+	CONSOLE WINDOW:
+	ISim P.20131013 (signature 0x7708f090)
+	WARNING: A WEBPACK license was found.
+	WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+	WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+	This is a Lite version of ISim.
+	Time resolution is 1 ps
+	Simulator is doing circuit initialization process.
+	Finished circuit initialization process.
+			   0clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			   5clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  10clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  15clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  20clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  25clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  30clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  35clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  40clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  45clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  50clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  55clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  60clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  65clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  70clk=0,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  75clk=1,s=00,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000000
+			  80clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=00000000
+			  85clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=10000000
+			  90clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=10000000
+			  95clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11000000
+			 100clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11000000
+			 105clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11100000
+			 110clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11100000
+			 115clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11110000
+			 120clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11110000
+			 125clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111000
+			 130clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111000
+			 135clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111100
+			 140clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111100
+			 145clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111110
+			 150clk=0,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111110
+			 155clk=1,s=01,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111111
+			 160clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111111
+			 165clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111110
+			 170clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111110
+			 175clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111100
+			 180clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111100
+			 185clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111000
+			 190clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111000
+			 195clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11110000
+			 200clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11110000
+			 205clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11100000
+			 210clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11100000
+			 215clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11000000
+			 220clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11000000
+			 225clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=10000000
+			 230clk=0,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=10000000
+			 235clk=1,s=10,i=00000000,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=00000000
+			 240clk=0,s=11,i=00000000,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000000
+			 245clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 250clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 255clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 260clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 265clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 270clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 275clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 280clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 285clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 290clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 295clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 300clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 305clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 310clk=0,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 315clk=1,s=11,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000001
+			 320clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 325clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 330clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 335clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 340clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 345clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 350clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 355clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 360clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 365clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 370clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 375clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 380clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 385clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 390clk=0,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 395clk=1,s=00,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000001
+			 400clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=00000001
+			 405clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=10000000
+			 410clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=10000000
+			 415clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11000000
+			 420clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11000000
+			 425clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11100000
+			 430clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11100000
+			 435clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11110000
+			 440clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11110000
+			 445clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111000
+			 450clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111000
+			 455clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111100
+			 460clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111100
+			 465clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111110
+			 470clk=0,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111110
+			 475clk=1,s=01,i=00000001,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111111
+			 480clk=0,s=10,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111111
+			 485clk=1,s=10,i=00000001,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111110
+			 490clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111110
+			 495clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111100
+			 500clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111100
+			 505clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111000
+			 510clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111000
+			 515clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11110000
+			 520clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11110000
+			 525clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11100000
+			 530clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11100000
+			 535clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11000000
+			 540clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11000000
+			 545clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=10000000
+			 550clk=0,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=10000000
+			 555clk=1,s=10,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=00000000
+			 560clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000000
+			 565clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 570clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 575clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 580clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 585clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 590clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 595clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 600clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 605clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 610clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 615clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 620clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 625clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 630clk=0,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 635clk=1,s=11,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000010
+			 640clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 645clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 650clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 655clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 660clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 665clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 670clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 675clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 680clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 685clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 690clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 695clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 700clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 705clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 710clk=0,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 715clk=1,s=00,i=00000010,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000010
+			 720clk=0,s=01,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=00000010
+			 725clk=1,s=01,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=10000001
+			 730clk=0,s=01,i=00000010,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=10000001
+			 735clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11000000
+			 740clk=0,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11000000
+			 745clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11100000
+			 750clk=0,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11100000
+			 755clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11110000
+			 760clk=0,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11110000
+			 765clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111000
+			 770clk=0,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111000
+			 775clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111100
+			 780clk=0,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111100
+			 785clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111110
+			 790clk=0,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111110
+			 795clk=1,s=01,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=1,a=11111111
+			 800clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111111
+			 805clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111110
+			 810clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111110
+			 815clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111100
+			 820clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111100
+			 825clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111000
+			 830clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11111000
+			 835clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11110000
+			 840clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11110000
+			 845clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11100000
+			 850clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11100000
+			 855clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11000000
+			 860clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=11000000
+			 865clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=10000000
+			 870clk=0,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=10000000
+			 875clk=1,s=10,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=0,a=00000000
+			 880clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000000
+			 885clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 890clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 895clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 900clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 905clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 910clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 915clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 920clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 925clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 930clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 935clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 940clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 945clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 950clk=0,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 955clk=1,s=11,i=00000011,serial_input_for_shift_right=1,serial_input_for_shift_left=0,a=00000011
+			 960clk=0,s=00,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 965clk=1,s=00,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 970clk=0,s=00,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 975clk=1,s=00,i=00000011,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 980clk=0,s=00,i=00000100,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 985clk=1,s=00,i=00000100,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 990clk=0,s=00,i=00000100,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			 995clk=1,s=00,i=00000100,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+			1000clk=0,s=00,i=00000100,serial_input_for_shift_right=0,serial_input_for_shift_left=1,a=00000011
+	ISim>  	
+
 	
 
 
