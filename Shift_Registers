@@ -81,3 +81,106 @@ module shift_right_register_4_bit_dff_tb;
 endmodule
 
 ..........................................................................................................................................................
+UNIVERSAL SHIFT REGISTER 4-BIT
+STEP 1: Write Verilog Code for 4x1 Multiplexer
+	module mux_4_1_dataflowmodelling(out,i3,i2,i1,i0,s1,s0);
+	output out;
+	input i3,i2,i1,i0,s1,s0;
+	assign out=((~s1&~s0&i0)|(~s1&s0&i1)|(s1&~s0&i2)|(s1&s0&i3));
+	endmodule
+STEP 2: Write Verilog Code for DFF_POSEDGE_TRIGGER
+	module DFF_POSEDGE_TRIGGER(q,qbar,d,clk);
+	output reg q=1'b0;
+	output reg qbar=1'b1;
+	input d,clk;
+	always@(posedge clk)
+	begin
+		if(clk==0)
+			begin
+				q=q;
+				qbar=qbar;
+			end
+
+		else if((d==0)&(clk==1))
+			begin
+				q=0;
+				qbar=1;
+			end
+
+		else 
+			begin
+				q=1;
+				qbar=0;
+			end
+	end
+	endmodule
+STEP 3: Write Verilog Code for universal_shift_register_4_bit
+	module universal_shift_register_4_bit(a,i,clk,s,serial_input_for_shift_right,serial_input_for_shift_left);
+	output [4:1]a;
+	input [4:1]i;
+	input clk;
+	input [1:0]s;
+	input serial_input_for_shift_right;
+	input serial_input_for_shift_left;
+	wire [4:1]out;
+
+	mux_4_1_dataflowmodelling MUL_4(out[4],i[4],a[3],serial_input_for_shift_right,a[4],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_3(out[3],i[3],a[2],a[4],a[3],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_2(out[2],i[2],a[1],a[3],a[2],s[1],s[0]);
+	mux_4_1_dataflowmodelling MUL_1(out[1],i[1],serial_input_for_shift_left,a[2],a[1],s[1],s[0]);
+
+	DFF_POSEDGE_TRIGGER DFF_4(a[4],/*qbar*/,out[4],clk);
+	DFF_POSEDGE_TRIGGER DFF_3(a[3],/*qbar*/,out[3],clk);
+	DFF_POSEDGE_TRIGGER DFF_2(a[2],/*qbar*/,out[2],clk);
+	DFF_POSEDGE_TRIGGER DFF_1(a[1],/*qbar*/,out[1],clk);
+
+	endmodule
+STEP 4: Write Test Bench for universal_shift_register_4_bit
+	module universal_shift_register_4_bit_tb;
+
+		// Inputs
+		reg [4:1] i;
+		reg clk;
+		reg [1:0] s;
+		reg serial_input_for_shift_right;
+		reg serial_input_for_shift_left;
+
+		// Outputs
+		wire [4:1] a;
+
+		// Instantiate the Unit Under Test (UUT)
+		universal_shift_register_4_bit uut (
+			.a(a), 
+			.i(i), 
+			.clk(clk), 
+			.s(s), 
+			.serial_input_for_shift_right(serial_input_for_shift_right), 
+			.serial_input_for_shift_left(serial_input_for_shift_left)
+		);
+
+		initial 
+		begin
+		$monitor($time,"clk=%b,s=%b,i=%b,serial_input_for_shift_right=%b,serial_input_for_shift_left=%b,a=%b",clk,s,i,serial_input_for_shift_right,serial_input_for_shift_left,a);
+			// Initialize Inputs
+			i = 4'b1111;
+			clk = 0;
+			s = 2'b01;
+			serial_input_for_shift_right = 1;
+			serial_input_for_shift_left = 0;
+
+		end
+			//always #10 s = s + 1;
+			always #5 clk = clk + 1;
+
+
+	endmodule
+..........................................................................................................................................................	
+	
+
+
+
+
+
+
+
+
