@@ -1293,7 +1293,10 @@ STEP 4: WRITE TEST BENCH FOR UNIVERSAL SHIFT REGISTER 8-BIT
 	
 STEP 5:
 	WAVEFORM:
-		https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/Universal%20Shift%20Register%204-bit%20When%20Shift%20Right%20is%201.png
+		2'b00 = https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/2'b00%20Universal%20Shift%20Register%208-bit.PNG
+		2'b01 = https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/2'b01%20Universal%20Shift%20Register%208-bit.PNG
+		2'b10 = https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/2'b10%20Universal%20Shift%20Register%208-bit.PNG
+		2'b11 = https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/2'b11%20Universal%20Shift%20Register%208-bit.PNG
 	
 STEP 6:
 	CONSOLE WINDOW:
