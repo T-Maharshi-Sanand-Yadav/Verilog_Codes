@@ -82,6 +82,10 @@ endmodule
 
 ..........................................................................................................................................................
 UNIVERSAL SHIFT REGISTER 4-BIT
+
+LOGIC DIAGRAM:
+	https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/Universal%20Shift%20Register%204-bit%20Logic%20Diagram.jpeg
+
 STEP 1: Write Verilog Code for 4x1 Multiplexer
 	module mux_4_1_dataflowmodelling(out,i3,i2,i1,i0,s1,s0);
 	output out;
