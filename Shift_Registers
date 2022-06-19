@@ -176,7 +176,7 @@ STEP 4: Write Test Bench for universal_shift_register_4_bit
 	endmodule
 STEP 5:
 	Waveform:
-		https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Images/blob/main/Universal%20Shift%20Register%204-bit%20When%20Shift%20Right%20is%201.png
+		https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/Universal%20Shift%20Register%204-bit%20When%20Shift%20Right%20is%201.png
 	
 STEP 6:
 	Console Window:
