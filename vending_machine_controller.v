@@ -1,3 +1,6 @@
+LOGIC DIAGRAM:
+  https://github.com/T-Maharshi-Sanand-Yadav/DSDV_Public/blob/main/Vending%20Machine%20Controller.PNG
+
 SOURCE CODE:
 
   module vending_machine_controller(present_state,next_state,clock,reset,x,z);
