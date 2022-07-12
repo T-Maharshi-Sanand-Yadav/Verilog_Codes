@@ -226,3 +226,46 @@ Test Bench: 2-bit Comparator using 1-bit Comparator
       always #10 A = A + 1;
       always #5 B = B + 1;
   endmodule
+_____________________________________________________________________________________________________________________________________________________________________
+Source Code: 4-bit Comparator using 2-bit Comparator
+  module comparator4bit_using_2bit(G,E,L,A,B);
+  //port declaration
+  output G,E,L;
+  input [3:0]A,B;
+  wire w1,w2,w3,w4,w5,w6,w7,w8;
+  comparator_2bit Comp1(w1,w2,w3,A[3:2],B[3:2]);
+  comparator_2bit Comp2(w4,w5,w6,A[1:0],B[1:0]);
+  and x1(w7,w4,w2);
+  and x2(E,w2,w5);
+  and x3(w8,w2,w6);
+  or x4(G,w1,w7);
+  or x5(L,w8,w3);
+  endmodule
+
+Test Bench: 4-bit Comparator using 2-bit Comparator
+  module comparator4bit_using_2bit_tb;
+    // Inputs
+    reg [3:0] A;
+    reg [3:0] B;
+    // Outputs
+    wire G;
+    wire E;
+    wire L;
+    // Instantiate the Unit Under Test (UUT)
+    comparator4bit_using_2bit uut (
+      .G(G), 
+      .E(E), 
+      .L(L), 
+      .A(A), 
+      .B(B)
+    );
+    initial 
+    begin
+    $monitor($time,"G=%b,E=%b,L=%b,A=%b,B=%b",G,E,L,A,B);
+      // Initialize Inputs
+      A = 0;
+      B = 0;
+    end
+      always #10 A = A + 1;
+      always #5 B = B + 1;
+  endmodule
