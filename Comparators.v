@@ -155,6 +155,7 @@ Source Code: 4-bit Comparator
   or o2(e,w[16],w[17],w[18],w[19],w[20],w[21],w[22],w[23],w[24],w[25],w[26],w[27],w[28],w[29],w[30],w[31]);
   or o3(l,w[32],w[33],w[34],w[35],w[36],w[37],w[38],w[39],w[40],w[41],w[42],w[43],w[44],w[45],w[46]);
   endmodule
+
 Test Bench: 4-bit Comparator
   module comparator_4_bit_tb;
     // Inputs
@@ -181,4 +182,47 @@ Test Bench: 4-bit Comparator
       end
       always #10 a=a+1;
       always #5 b=b+1;
+  endmodule
+_____________________________________________________________________________________________________________________________________________________________________
+Source Code: 2-bit Comparator using 1-bit Comparator
+  module comparator_2bit_using_1bit(G,E,L,A,B);
+  //port declaration
+  output G,E,L;
+  input [1:0]A,B;
+  wire w1,w2,w3,w4,w5,w6,w7,w8;
+  and x1(w7,w2,w4);
+  and x2(E,w5,w2);
+  and x3(w8,w2,w6);
+  or x4(G,w1,w7);
+  or x5(L,w3,w8);
+  comparator_1bit x6(w1,w2,w3,A[1],B[1]);
+  comparator_1bit x7(w4,w5,w6,A[0],B[0]);
+  endmodule
+
+Test Bench: 2-bit Comparator using 1-bit Comparator
+  module comparator_2bit_using_1bit_tb;
+    // Inputs
+    reg [1:0] A;
+    reg [1:0] B;
+    // Outputs
+    wire g2;
+    wire e2;
+    wire l2;
+    // Instantiate the Unit Under Test (UUT)
+    comparator_2bit_using_1bit uut (
+      .g2(g2), 
+      .e2(e2), 
+      .l2(l2), 
+      .A(A), 
+      .B(B)
+    );
+    initial 
+    begin
+    $monitor($time,"g2=%b,e2=%b,l2=%b,A=%b,B=%b",g2,e2,l2,A,B);
+      // Initialize Inputs
+      A = 0;
+      B = 0;
+    end
+      always #10 A = A + 1;
+      always #5 B = B + 1;
   endmodule
