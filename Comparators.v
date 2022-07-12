@@ -269,3 +269,45 @@ Test Bench: 4-bit Comparator using 2-bit Comparator
       always #10 A = A + 1;
       always #5 B = B + 1;
   endmodule
+_____________________________________________________________________________________________________________________________________________________________________
+Source Code: 8-bit Comparator using 4-bit Comparator
+  module comparator_8bit_using_4bit(G,E,L,A,B);
+  output G,E,L;
+  input [7:0]A,B;
+  wire w1,w2,w3,w4,w5,w6,w7,w8;
+  comparator_4bit_gatelevel comp1(w1,w2,w3,A[7],A[6],A[5],A[4],B[7],B[6],B[5],B[4]);
+  comparator_4bit_gatelevel comp2(w4,w5,w6,A[3],A[2],A[1],A[0],B[3],B[2],B[1],B[0]);
+  and x1(w7,w2,w4);
+  and x2(E,w5,w2);
+  and x3(w8,w2,w6);
+  or x4(G,w1,w7);
+  or x5(L,w3,w8);
+  endmodule
+
+Test Bench: 8-bit Comparator using 4-bit Comparator
+  module comparator_8bit_using_4bit_tb;
+	// Inputs
+	reg [7:0] A;
+	reg [7:0] B;
+	// Outputs
+	wire G;
+	wire E;
+	wire L;
+	// Instantiate the Unit Under Test (UUT)
+	comparator_8bit_using_4bit uut (
+		.G(G), 
+		.E(E), 
+		.L(L), 
+		.A(A), 
+		.B(B)
+	);
+	initial 
+	begin
+	$monitor($time,"G=%b,E=%b,L=%b,A=%b,B=%b",G,E,L,A,B);
+		// Initialize Inputs
+		A = 0;
+		B = 0;
+	end
+	  always #2 A = A + 1;
+	  always #1 B = B + 1; 
+endmodule
