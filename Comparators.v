@@ -184,6 +184,52 @@ Test Bench: 4-bit Comparator
       always #5 b=b+1;
   endmodule
 _____________________________________________________________________________________________________________________________________________________________________
+Source Code: 4-bit Comparator Data Flow Modelling 
+
+	module comparator_4_bit_abhijay(G,E,L,A,B);
+	//port declaration
+	output  G,E,L;
+	input [3:0]A,B;
+	// Data Flow Modelling
+	assign G =(A > B);
+	assign E =(A == B);
+	assign L =(A < B);
+	endmodule
+Test Bench: 4-bit Comparator Data Flow Modelling
+	module comparator_4_bit_abhijay_tb;
+
+		// Inputs
+		reg [3:0] A;
+		reg [3:0] B;
+
+		// Outputs
+		wire G;
+		wire E;
+		wire L;
+
+		// Instantiate the Unit Under Test (UUT)
+		comparator_4_bit_abhijay uut (
+			.G(G), 
+			.E(E), 
+			.L(L), 
+			.A(A), 
+			.B(B)
+		);
+
+		initial 
+		begin
+		$monitor($time,"G=%b,E=%b,L=%b,A=%b,B=%b",G,E,L,A,B);
+			// Initialize Inputs
+			A = 0;
+			B = 0;
+
+
+		end
+		always #10 A = A + 1; 
+		always #5 B = B + 1;
+
+	endmodule
+_____________________________________________________________________________________________________________________________________________________________________
 Source Code: 2-bit Comparator using 1-bit Comparator
   module comparator_2bit_using_1bit(G,E,L,A,B);
   //port declaration
