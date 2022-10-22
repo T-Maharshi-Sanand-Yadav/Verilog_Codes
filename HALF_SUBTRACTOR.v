@@ -36,3 +36,20 @@ Test Bench : Gate Level Modelling
     end  
   endmodule
 ..................................................................................................................
+Source Code: Data Flow Modelling
+  module halfsubtractor(difference,borrow,a,b);
+  output difference;
+  output borrow;
+  input a;
+  input b;
+  assign difference = a ^ b;
+  assign borrow = (~a & b);
+  endmodule
+
+Test Bench: Data Flow Modelling
+..................................................................................................................
+Source Code: Behavioural Modelling
+  
+
+Test Bench: Behavioural Modelling
+..................................................................................................................
