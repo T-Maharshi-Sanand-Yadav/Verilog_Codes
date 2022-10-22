@@ -45,3 +45,29 @@ Test Bench: Gate Level Modelling
     end      
   endmodule
 ..................................................................................................................
+Source Code: Data Flow Modelling
+  module fullsubtractor(difference,borrow,a,b,bin);
+  output difference;
+  output borrow;
+  input a;
+  input b;
+  input bin;
+  assign difference = a ^ b ^ bin;
+  assign borrow = ((~a&b)|(~a&bin)|(b&bin));
+  endmodule
+
+Test Bench: Data Flow Modelling
+..................................................................................................................
+Source Code: Behavioural Modelling
+  module fullsubtractor(difference,borrow,a,b,bin);
+  output difference;
+  output borrow;
+  input a;
+  input b;
+  input bin;
+  always@(a or b or bin)
+  {borrow,difference} = a - b - bin;
+  endmodule
+
+Test Bench: Behavioural Modelling
+..................................................................................................................
