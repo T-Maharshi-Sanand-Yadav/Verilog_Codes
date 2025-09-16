@@ -1,11 +1,10 @@
-
 # 🧩 Logic Gates & Combinational Circuits
 
 ## 🔹 Logic Gates
 
-* NOT Gate (Inverter)
 * AND Gate
 * OR Gate
+* NOT Gate (Inverter)
 * NAND Gate
 * NOR Gate
 * XOR Gate (Exclusive-OR)
