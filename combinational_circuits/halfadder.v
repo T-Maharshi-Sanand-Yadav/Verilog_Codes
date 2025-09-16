@@ -164,3 +164,14 @@ module halfadder_allmodels_tb;
         $finish;
     end
 endmodule
+
+
+
+
+// ===================================================
+// EDA Playground: 
+// ===================================================
+halfadder_gatelevel = https://edaplayground.com/x/V7A6
+halfadder_dataflow = https://edaplayground.com/x/aBMY
+halfadder_behavioural = https://edaplayground.com/x/JrMk
+// ===================================================
