@@ -188,3 +188,11 @@ module fulladder_allmodels_tb;
         $finish;
     end
 endmodule
+
+// ===================================================
+// EDA Playground: 
+// ===================================================
+fulladder_gatelevel = https://edaplayground.com/x/MShu
+fulladder_dataflow = https://edaplayground.com/x/de5U
+fulladder_behavioural = https://edaplayground.com/x/aCEY
+// ===================================================

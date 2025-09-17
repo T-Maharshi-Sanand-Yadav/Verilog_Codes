@@ -2,13 +2,12 @@
 
 ## 🔹 Logic Gates
 
-* AND Gate
-* OR Gate
-* NOT Gate (Inverter)
-* NAND Gate
-* NOR Gate
-* XOR Gate (Exclusive-OR)
-* XNOR Gate (Exclusive-NOR)
+* AND Gate == DoneOR Gate == Done
+* NOT Gate (Inverter) == Done
+* NAND Gate == Done
+* NOR Gate == Done
+* XOR Gate (Exclusive-OR) == Done
+* XNOR Gate (Exclusive-NOR) == Done
 
 ---
 
@@ -16,14 +15,72 @@
 
 ### 1️⃣ Arithmetic Circuits
 
-* Half Adder
-* Full Adder
-* Half Subtractor
-* Full Subtractor
-* Parallel Adder/Subtractor
-* Carry Look-Ahead Adder
+* Half Adder == Done
+* Full Adder == Done
+* Ripple Carry Adder
+  * 4-bit Ripple Carry Adder
+  * 8-bit Ripple Carry Adder
+  * 16-bit Ripple Carry Adder
+* Carry Look Ahead Adder
+  * 4-bit Carry Look Ahead Adder
+  * 8-bit Carry Look Ahead Adder
+  * 16-bit Carry Look Ahead Adder
+* Carry Select Adder
+  * 4-bit Carry Select Adder
+  * 8-bitCarry Select Adder
+  * 16-bitCarry Select Adder
 * Carry Save Adder
+  * 4-bit Carry Save Adder
+  * 8-bit Carry Save Adder
+  * 16-bit Carry Save Adder
+* Brent Kung Adder
+  * 4-bit Brent Kung Adder
+  * 8-bit Brent Kung Adder
+  * 16-bit Brent Kung Adder
+* Kogge Stone Adder
+  * 4-bit Kogge Stone Adder
+  * 8-bit Kogge Stone Adder
+  * 16-bit Kogge Stone Adder
 * BCD Adder
+* Half Subtractor == Done
+* Full Subtractor == Done
+* Parallel Adder/Subtractor
+
+### 🔹 Common Multipliers in Digital Design
+
+1. **Array Multiplier**
+   * Simple structure using add-and-shift.
+   * Example: Braun Multiplier.
+2. **Booth Multiplier**
+   * Uses Booth’s algorithm for signed multiplication.
+   * Reduces number of partial products.
+3. **Modified Booth Multiplier (Radix-4, Radix-8)**
+   * Faster than normal Booth, groups bits for fewer partial products.
+4. **Wallace Tree Multiplier**
+   * Uses a tree of carry-save adders (CSAs) to reduce partial products quickly.
+5. **Dadda Multiplier**
+   * Similar to Wallace tree but with minimum number of adders.
+   * Optimized delay and area.
+6. **Shift-and-Add Multiplier**
+   * Sequential multiplier (iterative).
+   * Low area, but slower.
+7. **Baugh-Wooley Multiplier**
+   * Specifically for **signed multiplication** using two’s complement.
+8. **Vedic Multiplier (Urdhva Tiryakbhyam)**
+   * Based on ancient Vedic mathematics.
+   * Parallel partial product generation.
+   * Popular in low-power and FPGA designs.
+9. **Serial Multiplier**
+   * Multiplies bit by bit, very small hardware.
+   * Used in area-constrained applications.
+10. **Parallel Multiplier**
+    * All partial products generated simultaneously.
+    * High speed but large area.
+11. **Pipelined Multiplier**
+    * Uses pipeline registers to improve throughput.
+    * Good for high-performance DSP applications.
+12. **Distributed Arithmetic Multiplier**
+    * Efficient for FIR filters in DSP, replaces multipliers with LUT-based add-shift operations.
 
 ---
 
