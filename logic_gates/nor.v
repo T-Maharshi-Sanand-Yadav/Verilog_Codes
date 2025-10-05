@@ -117,3 +117,9 @@ module nor_allmodels_tb;
         $finish;
     end
 endmodule
+
+
+
+gate level modelling = https://edaplayground.com/x/7yPL
+data flow modelling = https://edaplayground.com/x/mkuM
+behavioural modelling = https://edaplayground.com/x/KJjS
