@@ -1,8 +1,8 @@
-module fulladder_behaviouralmodelling(sum, carry, a, b, cin);
-  input a, b, cin;
-  output reg sum, carry;
+module fulladder_behavioural(carry, sum, a, b, cin);
+    output reg carry, sum;
+    input a, b, cin;
 
-  always @(*) begin
-    {carry, sum} = a + b + cin;
-  end
+    always @(a, b, cin) begin
+        {carry, sum} = a + b + cin;
+    end
 endmodule

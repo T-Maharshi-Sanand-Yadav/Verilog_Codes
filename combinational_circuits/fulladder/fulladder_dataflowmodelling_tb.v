@@ -1,19 +1,25 @@
-module fulladder_dataflowmodelling_tb;
-  reg a, b, cin;
-  wire sum, carry;
+module fulladder_dataflow_tb;
+    reg a, b, cin;
+    wire carry, sum;
 
-  fulladder_dataflowmodelling UUT (sum, carry, a, b, cin);
+    fulladder_dataflow uut(carry, sum, a, b, cin);
 
-  initial begin
-    $monitor("Time=%0t a=%b b=%b cin=%b | sum=%b carry=%b", $time, a, b, cin, sum, carry);
-    a=0; b=0; cin=0; #10;
-    a=0; b=0; cin=1; #10;
-    a=0; b=1; cin=0; #10;
-    a=0; b=1; cin=1; #10;
-    a=1; b=0; cin=0; #10;
-    a=1; b=0; cin=1; #10;
-    a=1; b=1; cin=0; #10;
-    a=1; b=1; cin=1; #10;
-    $finish;
-  end
+    initial begin
+        $dumpfile("fulladder_dataflow.vcd");
+        $dumpvars(0, fulladder_dataflow_tb);
+
+        $monitor($time, " a=%b b=%b cin=%b | Carry=%b Sum=%b", a, b, cin, carry, sum);
+
+        // Apply all combinations
+        a=0;b=0;cin=0; #50;
+        a=0;b=0;cin=1; #50;
+        a=0;b=1;cin=0; #50;
+        a=0;b=1;cin=1; #50;
+        a=1;b=0;cin=0; #50;
+        a=1;b=0;cin=1; #50;
+        a=1;b=1;cin=0; #50;
+        a=1;b=1;cin=1; #50;
+
+        $finish;
+    end
 endmodule

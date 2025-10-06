@@ -1,7 +1,7 @@
-module fulladder_dataflowmodelling(sum, carry, a, b, cin);
-  input a, b, cin;
-  output sum, carry;
+module fulladder_dataflow(carry, sum, a, b, cin);
+    output carry, sum;
+    input a, b, cin;
 
-  assign sum = a ^ b ^ cin;
-  assign carry = (a & b) | (b & cin) | (a & cin);
+    assign sum   = a ^ b ^ cin;
+    assign carry = (a & b) | (b & cin) | (a & cin);
 endmodule
