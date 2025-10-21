@@ -40,6 +40,4 @@ module halfsubtractor_using_basic_gates_tb;
 
         $finish;
     end
-
-
-    
+endmodule
