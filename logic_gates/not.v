@@ -16,7 +16,7 @@ module not_gatelevelmodelling_tb;
         $dumpfile("not_gatelevel.vcd");
         $dumpvars(0, not_gatelevelmodelling_tb);
 
-        $monitor($time, " a=%b | GateLevel=%b", a, y);
+        $monitor($time, " a=%b | y=%b", a, y);
 
         a = 0; #50;   // Start at 0
         a = 1; #50;   // Then go to 1
@@ -43,7 +43,7 @@ module not_dataflowmodelling_tb;
         $dumpfile("not_dataflow.vcd");
         $dumpvars(0, not_dataflowmodelling_tb);
 
-        $monitor($time, " a=%b | DataFlow=%b", a, y);
+        $monitor($time, " a=%b | y=%b", a, y);
 
         a = 0; #50;   // Start at 0
         a = 1; #50;   // Then go to 1
@@ -72,7 +72,7 @@ module not_behaviouralmodelling_tb;
         $dumpfile("not_behavioural.vcd");
         $dumpvars(0, not_behaviouralmodelling_tb);
 
-        $monitor($time, " a=%b | Behavioural=%b", a, y);
+        $monitor($time, " a=%b | y=%b", a, y);
 
         a = 0; #50;   // Start at 0
         a = 1; #50;   // Then go to 1
