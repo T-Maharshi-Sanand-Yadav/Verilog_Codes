@@ -116,6 +116,20 @@ I create educational content covering:
 
 ---
 
+## 🚀 Try Online - Interactive Simulations
+
+Try and simulate the Verilog designs directly on EDA Playground without installing any tools:
+
+- **EDA Playground**: [Explore Interactive Verilog Simulations](https://edaplayground.com)
+  - Run simulations in your browser
+  - No software installation required
+  - Instant waveform visualization
+  - Collaborative debugging environment
+
+*Note: You can upload and simulate any design from this repository on EDA Playground to experiment with waveforms and testbenches.*
+
+---
+
 ## ⭐ Support This Repository
 
 If you find this repository helpful:
@@ -138,6 +152,7 @@ If you find this repository helpful:
 - RTL-to-GDSII Practice Projects
 - Interview Questions
 - VLSI Notes
+- EDA Playground Live Project Links
 
 ---
 
