@@ -110,6 +110,7 @@ I create educational content covering:
 - **GitHub**: [T-Maharshi-Sanand-Yadav](https://github.com/T-Maharshi-Sanand-Yadav)
 - **YouTube**: [@maharshisanandyadav](https://www.youtube.com/@maharshisanandyadav)
 - **YouTube Playlist**: [Standard Cell Characterization](https://youtube.com/playlist?list=PLS8qCSk3htIIKeumRz1CwcW9sIkLiUJlv)
+- **LinkedIn Newsletter**: [Verilog Codes](https://www.linkedin.com/newsletters/verilog-codes-7361018890564366337)
 - **Instagram**: [@vlsi.tmsy.tutorials](https://www.instagram.com/vlsi.tmsy.tutorials)
 - **Website**: [tmsytutorials.com](https://www.tmsytutorials.com)
 
@@ -122,6 +123,7 @@ If you find this repository helpful:
 - ⭐ **Star** this repository
 - 👤 **Follow** my GitHub profile
 - 📺 **Subscribe** to my YouTube channel
+- 📧 **Subscribe** to my LinkedIn Newsletter
 - 📤 **Share** with VLSI learners and engineers
 
 ---
