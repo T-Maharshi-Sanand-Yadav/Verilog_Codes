@@ -8,36 +8,35 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero small-hero">
-    <div class="container">
-      <p class="eyebrow">Static file viewer page</p>
-      <h1>Verilog Code Viewer</h1>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="index.html">Verilog_Codes</a>
+      <div class="nav-links">
+        <a href="browse.html">Browse</a>
+        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page-layout">
+    <section class="page-title">
+      <p class="eyebrow">Single-file viewer</p>
+      <h1 id="pageTitle">Verilog Code Viewer</h1>
       <p class="subtitle">
-        This page opens a single Verilog file as its own static page, so readers can examine code directly on the website.
+        Open a source file as a shareable website page with syntax highlighting and direct source links.
       </p>
       <div class="actions">
         <a class="btn primary" href="browse.html">Back to Browse</a>
-        <a class="btn secondary" href="index.html">Back to Home</a>
+        <a class="btn secondary" id="github-link" target="_blank" rel="noreferrer">Open on GitHub</a>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <main class="container">
-    <section class="section viewer-shell">
-      <div class="viewer-header">
-        <div>
-          <p class="section-tag">Single-file viewer</p>
-          <h2 id="pageTitle">Reading Verilog code</h2>
-        </div>
-        <a class="btn secondary small" id="github-link" target="_blank" rel="noreferrer">Open source on GitHub</a>
+    <section class="viewer-panel single-viewer">
+      <div class="meta-row">
+        <span id="currentFileLabel">Loading file...</span>
+        <span id="currentFileMeta"></span>
       </div>
-
-      <div class="viewer-panel">
-        <div class="meta-row">
-          <span id="currentFileLabel">Loading file…</span>
-        </div>
-        <pre id="codeOutput">Loading code preview…</pre>
-      </div>
+      <pre id="codeOutput">Loading code preview...</pre>
     </section>
   </main>
 

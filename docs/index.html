@@ -3,86 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verilog Codes - Browse on the Website</title>
-  <meta name="description" content="Browse and read Verilog HDL examples directly on this GitHub Pages website without leaving the site." />
+  <title>Verilog Codes - RTL Examples and VLSI Practice</title>
+  <meta name="description" content="Browse Verilog HDL examples, RTL modules, combinational circuits, sequential circuits, testbenches, and VLSI practice files directly on GitHub Pages." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero">
-    <div class="container">
-      <p class="eyebrow">VLSI • RTL • Verilog</p>
-      <h1>Verilog_Codes</h1>
-      <p class="subtitle">
-        Explore Verilog HDL examples, RTL design patterns, combinational and sequential circuits,
-        and practice files directly from this website.
-      </p>
-      <div class="actions">
-        <a class="btn primary" href="browse.html">Browse Code</a>
-        <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open GitHub Repo</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="index.html">Verilog_Codes</a>
+      <div class="nav-links">
+        <a href="browse.html">Browse</a>
+        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="grid">
-      <article class="card">
-        <h2>Basic Verilog HDL</h2>
-        <ul>
-          <li>Logic gates</li>
-          <li>Multiplexers</li>
-          <li>Comparators</li>
-          <li>Adders and subtractors</li>
-        </ul>
-      </article>
+  <main>
+    <section class="hero">
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="eyebrow">VLSI • RTL • Verilog HDL</p>
+          <h1>Readable Verilog examples for digital design practice</h1>
+          <p class="subtitle">
+            Explore logic gates, adders, subtractors, flip-flops, counters, state machines,
+            RISC-V practice blocks, SHA-256 RTL, and testbenches directly from this website.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="browse.html">Browse Code</a>
+            <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open Repository</a>
+          </div>
+        </div>
 
-      <article class="card">
-        <h2>Sequential Circuits</h2>
-        <ul>
-          <li>Flip-flops</li>
-          <li>Registers</li>
-          <li>Counters</li>
-          <li>Shift registers</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h2>Advanced RTL</h2>
-        <ul>
-          <li>Carry lookahead adder</li>
-          <li>Ripple carry adder</li>
-          <li>Multipliers</li>
-          <li>Parameterized designs</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h2>Verification & Synthesis</h2>
-        <ul>
-          <li>Testbenches</li>
-          <li>Simulation examples</li>
-          <li>STA practice</li>
-          <li>RTL-to-gate flow</li>
-        </ul>
-      </article>
+        <aside class="hero-panel" aria-label="Repository summary">
+          <div class="panel-row">
+            <span>Total source files</span>
+            <strong id="totalFiles">Loading...</strong>
+          </div>
+          <div class="panel-row">
+            <span>Detected testbenches</span>
+            <strong id="testbenchCount">Loading...</strong>
+          </div>
+          <div class="panel-row">
+            <span>Main categories</span>
+            <strong id="categoryCount">Loading...</strong>
+          </div>
+          <a class="mini-link" href="browse.html">Open live catalog</a>
+        </aside>
+      </div>
     </section>
 
-    <section class="section">
-      <h2>Browse code directly on the site</h2>
-      <p class="subtitle compact">
-        Use the dedicated static browse page to read Verilog examples without needing to leave the website.
-      </p>
-      <div class="actions">
-        <a class="btn primary" href="browse.html">Open Browse Page</a>
-      </div>
+    <section class="section-band">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-tag">Learning path</p>
+          <h2>Start from gates, move toward larger RTL blocks</h2>
+        </div>
 
-      <div class="category-grid">
-        <a class="category-card" href="browse.html?group=Logic%20Gates"><strong>Logic Gates</strong><span>Browse gate-level designs</span></a>
-        <a class="category-card" href="browse.html?group=Combinational%20Circuits"><strong>Combinational Circuits</strong><span>Browse adders, subtractors, control logic</span></a>
-        <a class="category-card" href="browse.html?group=PS%20Verilog"><strong>PS Verilog</strong><span>Browse processor and RTL practice files</span></a>
-        <a class="category-card" href="browse.html?group=Top%20Level%20Examples"><strong>Top Level Examples</strong><span>Browse sample top-level modules</span></a>
+        <div class="grid feature-grid">
+          <article class="card">
+            <h3>Logic Gates</h3>
+            <p>AND, OR, NOT, NAND, NOR, XOR, and XNOR designs with modelling styles and testbenches.</p>
+            <a href="browse.html?group=Logic%20Gates">Browse logic gates</a>
+          </article>
+
+          <article class="card">
+            <h3>Combinational Circuits</h3>
+            <p>Half adders, full adders, subtractors, carry lookahead adders, ripple carry adders, and encoders.</p>
+            <a href="browse.html?group=Combinational%20Circuits">Browse combinational RTL</a>
+          </article>
+
+          <article class="card">
+            <h3>Sequential Circuits</h3>
+            <p>Flip-flops, counters, shift registers, and finite-state-machine examples for clocked design.</p>
+            <a href="browse.html?group=Sequential%20Circuits">Browse sequential RTL</a>
+          </article>
+
+          <article class="card">
+            <h3>Processor Practice</h3>
+            <p>RISC-V blocks, APB timer examples, SHA-256 modules, and timing-path practice files.</p>
+            <a href="browse.html?group=PS%20Verilog">Browse PS Verilog</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band muted-band">
+      <div class="container split-layout">
+        <div>
+          <p class="section-tag">Code browser</p>
+          <h2>Read source files without leaving the site</h2>
+          <p class="subtitle compact">
+            The browser page builds a live catalog from the repository tree, supports file-name search,
+            and opens each Verilog file with syntax highlighting and a GitHub source link.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="browse.html">Open Browse Page</a>
+          </div>
+        </div>
+
+        <div class="quick-list" aria-label="Popular examples">
+          <a href="viewer.html?file=fulladder.v">fulladder.v</a>
+          <a href="viewer.html?file=counter.v">counter.v</a>
+          <a href="viewer.html?file=riscv_alu.v">riscv_alu.v</a>
+          <a href="viewer.html?file=sha256_core.v">sha256_core.v</a>
+        </div>
       </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>Created for Verilog and VLSI learners.</span>
+      <a href="https://github.com/T-Maharshi-Sanand-Yadav" target="_blank" rel="noreferrer">T-Maharshi-Sanand-Yadav</a>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>

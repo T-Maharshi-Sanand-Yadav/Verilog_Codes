@@ -4,64 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Browse Verilog Codes</title>
-  <meta name="description" content="Browse Verilog code files as static pages on this GitHub Pages website." />
+  <meta name="description" content="Search and read Verilog code files directly on this GitHub Pages website." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="hero small-hero">
-    <div class="container">
-      <p class="eyebrow">Static code browser page</p>
-      <h1>Browse Verilog Files</h1>
-      <p class="subtitle">
-        This page is a dedicated static page for reading code directly on the website.
-      </p>
-      <div class="actions">
-        <a class="btn primary" href="index.html">Back to Home</a>
-        <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open GitHub Repo</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="index.html">Verilog_Codes</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-    </div>
+    </nav>
   </header>
 
-  <main class="container">
-    <section class="section search-shell">
-      <div class="viewer-header">
-        <div>
-          <p class="section-tag">Website code browser</p>
-          <h2>Search and browse Verilog files</h2>
-        </div>
-        <a class="btn secondary small" id="github-link" target="_blank" rel="noreferrer">Open source on GitHub</a>
-      </div>
-
-      <label for="searchInput" class="search-label">Search by file name</label>
-      <input id="searchInput" class="search-input" type="text" placeholder="Try: multiplexer, counter, alu..." />
-
-      <div id="categoryGrid" class="category-grid"></div>
+  <main class="container page-layout">
+    <section class="page-title">
+      <p class="eyebrow">Static code browser</p>
+      <h1>Browse Verilog Files</h1>
+      <p class="subtitle">
+        Search the repository catalog, filter by category, and preview source files directly in the website.
+      </p>
     </section>
 
-    <section class="section viewer-shell">
-      <div class="viewer-header">
-        <div>
-          <p class="section-tag">Code viewer</p>
-          <h2>Read Verilog files inside the website</h2>
-        </div>
+    <section class="toolbar">
+      <label class="search-box" for="searchInput">
+        <span>Search files</span>
+        <input id="searchInput" class="search-input" type="search" placeholder="Try: adder, counter, riscv, sha256..." />
+      </label>
+      <div class="toolbar-stat">
+        <span>Showing</span>
+        <strong id="visibleFileCount">Loading...</strong>
       </div>
+    </section>
 
-      <div class="viewer-grid">
-        <aside class="viewer-sidebar">
-          <label for="groupSelect">Category</label>
-          <select id="groupSelect"></select>
+    <section class="category-grid" id="categoryGrid" aria-label="Code categories"></section>
 
-          <label for="fileSelect">Code file</label>
-          <select id="fileSelect"></select>
-        </aside>
+    <section class="viewer-shell">
+      <aside class="viewer-sidebar">
+        <label for="groupSelect">Category</label>
+        <select id="groupSelect"></select>
 
-        <div class="viewer-panel">
-          <div class="meta-row">
-            <span id="currentFileLabel">Select a file to view</span>
-          </div>
-          <pre id="codeOutput">Loading code preview…</pre>
+        <label for="fileSelect">Code file</label>
+        <select id="fileSelect"></select>
+
+        <div class="file-actions">
+          <a class="btn secondary small" id="github-link" target="_blank" rel="noreferrer">Open on GitHub</a>
+          <a class="btn secondary small" id="singleViewerLink" href="viewer.html">Single-file page</a>
         </div>
-      </div>
+      </aside>
+
+      <article class="viewer-panel">
+        <div class="meta-row">
+          <span id="currentFileLabel">Select a file to view</span>
+          <span id="currentFileMeta"></span>
+        </div>
+        <pre id="codeOutput">Loading code preview...</pre>
+      </article>
     </section>
   </main>
 
