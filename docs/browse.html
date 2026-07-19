@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browse Verilog Codes</title>
+  <meta name="description" content="Browse Verilog code files as static pages on this GitHub Pages website." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero small-hero">
+    <div class="container">
+      <p class="eyebrow">Static code browser page</p>
+      <h1>Browse Verilog Files</h1>
+      <p class="subtitle">
+        This page is a dedicated static page for reading code directly on the website.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="index.html">Back to Home</a>
+        <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open GitHub Repo</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section viewer-shell">
+      <div class="viewer-header">
+        <div>
+          <p class="section-tag">Website code browser</p>
+          <h2>Read Verilog files inside the website</h2>
+        </div>
+        <a class="btn secondary small" id="github-link" target="_blank" rel="noreferrer">Open source on GitHub</a>
+      </div>
+
+      <div class="viewer-grid">
+        <aside class="viewer-sidebar">
+          <label for="groupSelect">Category</label>
+          <select id="groupSelect"></select>
+
+          <label for="fileSelect">Code file</label>
+          <select id="fileSelect"></select>
+        </aside>
+
+        <div class="viewer-panel">
+          <div class="meta-row">
+            <span id="currentFileLabel">Select a file to view</span>
+          </div>
+          <pre id="codeOutput">Loading code preview…</pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

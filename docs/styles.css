@@ -28,6 +28,10 @@ body {
   background: radial-gradient(circle at top, rgba(96, 165, 250, 0.2), transparent 40%);
 }
 
+.small-hero {
+  padding: 56px 0 30px;
+}
+
 .eyebrow,
 .section-tag {
   text-transform: uppercase;
@@ -46,6 +50,10 @@ h1 {
   color: var(--muted);
   font-size: 1.06rem;
   line-height: 1.7;
+}
+
+.compact {
+  margin-bottom: 14px;
 }
 
 .actions {
