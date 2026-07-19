@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verilog Codes - GitHub Pages</title>
-  <meta name="description" content="Verilog HDL examples, RTL design practice, and VLSI learning resources published through GitHub Pages." />
+  <title>Verilog Codes - Browse on the Website</title>
+  <meta name="description" content="Browse and read Verilog HDL examples directly on this GitHub Pages website without leaving the site." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,12 +13,12 @@
       <p class="eyebrow">VLSI • RTL • Verilog</p>
       <h1>Verilog_Codes</h1>
       <p class="subtitle">
-        A curated collection of Verilog HDL examples, sequential circuits, combinational logic,
-        RTL design patterns, and synthesis-oriented practice files.
+        Explore Verilog HDL examples, RTL design patterns, combinational and sequential circuits,
+        and practice files directly from this website.
       </p>
       <div class="actions">
-        <a class="btn primary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open Repository</a>
-        <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/blob/main/README.md" target="_blank" rel="noreferrer">Read README</a>
+        <a class="btn primary" href="#code-viewer">Browse Code</a>
+        <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open GitHub Repo</a>
       </div>
     </div>
   </header>
@@ -28,30 +28,30 @@
       <article class="card">
         <h2>Basic Verilog HDL</h2>
         <ul>
-          <li>Logic Gates</li>
+          <li>Logic gates</li>
           <li>Multiplexers</li>
           <li>Comparators</li>
-          <li>Adders and Subtractors</li>
+          <li>Adders and subtractors</li>
         </ul>
       </article>
 
       <article class="card">
         <h2>Sequential Circuits</h2>
         <ul>
-          <li>Flip-Flops</li>
+          <li>Flip-flops</li>
           <li>Registers</li>
           <li>Counters</li>
-          <li>Shift Registers</li>
+          <li>Shift registers</li>
         </ul>
       </article>
 
       <article class="card">
         <h2>Advanced RTL</h2>
         <ul>
-          <li>Carry Lookahead Adder</li>
-          <li>Ripple Carry Adder</li>
+          <li>Carry lookahead adder</li>
+          <li>Ripple carry adder</li>
           <li>Multipliers</li>
-          <li>Parameterized Designs</li>
+          <li>Parameterized designs</li>
         </ul>
       </article>
 
@@ -59,32 +59,41 @@
         <h2>Verification & Synthesis</h2>
         <ul>
           <li>Testbenches</li>
-          <li>Simulation Examples</li>
-          <li>Timing and Synthesis Flow</li>
-          <li>STA Practice</li>
+          <li>Simulation examples</li>
+          <li>STA practice</li>
+          <li>RTL-to-gate flow</li>
         </ul>
       </article>
     </section>
 
-    <section class="section">
-      <h2>Popular folders</h2>
-      <div class="folder-grid">
-        <a class="folder-card" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/tree/main/logic_gates" target="_blank" rel="noreferrer">logic_gates/</a>
-        <a class="folder-card" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/tree/main/combinational_circuits" target="_blank" rel="noreferrer">combinational_circuits/</a>
-        <a class="folder-card" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/tree/main/ps_verilog" target="_blank" rel="noreferrer">ps_verilog/</a>
-        <a class="folder-card" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/tree/main/Flip%20Flops%20Positive%20Edge%20Trigger%20If-Else.v" target="_blank" rel="noreferrer">Sequential Example</a>
+    <section id="code-viewer" class="section viewer-shell">
+      <div class="viewer-header">
+        <div>
+          <p class="section-tag">Website code browser</p>
+          <h2>Read Verilog files inside the website</h2>
+        </div>
+        <a class="btn secondary small" id="github-link" target="_blank" rel="noreferrer">Open source on GitHub</a>
       </div>
-    </section>
 
-    <section class="section">
-      <h2>Featured files</h2>
-      <div class="file-list">
-        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/blob/main/MULTIPLEXER.v" target="_blank" rel="noreferrer">MULTIPLEXER.v</a>
-        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/blob/main/Comparators.v" target="_blank" rel="noreferrer">Comparators.v</a>
-        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/blob/main/moore_0100_sequence.v" target="_blank" rel="noreferrer">moore_0100_sequence.v</a>
-        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/blob/main/vending_machine_controller.v" target="_blank" rel="noreferrer">vending_machine_controller.v</a>
+      <div class="viewer-grid">
+        <aside class="viewer-sidebar">
+          <label for="groupSelect">Category</label>
+          <select id="groupSelect"></select>
+
+          <label for="fileSelect">Code file</label>
+          <select id="fileSelect"></select>
+        </aside>
+
+        <div class="viewer-panel">
+          <div class="meta-row">
+            <span id="currentFileLabel">Select a file to view</span>
+          </div>
+          <pre id="codeOutput">Loading code preview…</pre>
+        </div>
       </div>
     </section>
   </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
