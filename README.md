@@ -69,19 +69,51 @@ Welcome to the **Verilog_Codes** repository! This comprehensive collection conta
 ```
 Verilog_Codes/
 │
-├── Basic_Gates/
-├── Combinational_Circuits/
-├── Sequential_Circuits/
-├── Adders/
-├── Multipliers/
-├── FSM/
-├── Testbenches/
-├── Synthesis/
-├── STA/
-├── Characterization/
-├── Projects/
+├── combinational_circuits/
+│   ├── fulladder/
+│   ├── fullsubtractor/
+│   ├── halfadder/
+│   ├── halfsubtractor/
+│   ├── Carry Look Ahead Adder/
+│   ├── Ripple Carry Adder/
+│   ├── comparators/
+│   ├── multiplexers/
+│   └── priority_encoder_4x2/
+├── logic_gates/
+│   ├── and_gate_files/
+│   ├── nand_verilog_files/
+│   ├── nor_gate_verilog/
+│   ├── not_verilog_files/
+│   ├── or_verilog_files/
+│   ├── xnor_gate_verilog/
+│   ├── xor_gate_verilog/
+│   └── buffers/
+├── sequential_circuits/
+│   ├── flip_flops/
+│   ├── fsm/
+│   └── registers/
+├── ps_verilog/
+│   ├── sha256/
+│   └── RISC-V, APB, counters, timing, and practice RTL files
+├── docs/
+│   └── GitHub Pages website files
+├── references/
+│   └── notes, syllabus, cell list, and tool references
+├── scripts/
+│   └── TCL and automation scripts
 └── README.md
 ```
+
+For future uploads, place new files by circuit type:
+
+- Logic gates and buffers: `logic_gates/`
+- Adders, subtractors, multiplexers, comparators, encoders: `combinational_circuits/`
+- Flip-flops, registers, counters, FSMs: `sequential_circuits/`
+- Processor-side practice, SHA-256, APB, RISC-V, and larger RTL experiments: `ps_verilog/`
+- Notes, syllabus, tool setup, and non-code references: `references/`
+- TCL or automation scripts: `scripts/`
+
+See [`DIRECTORY_STRUCTURE.md`](DIRECTORY_STRUCTURE.md) for the upload checklist.
 
 ---
 

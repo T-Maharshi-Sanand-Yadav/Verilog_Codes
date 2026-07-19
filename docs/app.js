@@ -37,6 +37,7 @@ function toDisplayGroup(path) {
 
   if (top === "logic_gates") return "Logic Gates";
   if (top === "combinational_circuits") return "Combinational Circuits";
+  if (top === "sequential_circuits") return "Sequential Circuits";
   if (top === "ps_verilog") return "PS Verilog";
   if (lowerPath.includes("flip flop") || lowerPath.includes("shift_register") || lowerPath.includes("counter") || lowerPath.includes("sequence") || lowerPath.includes("vending")) {
     return "Sequential Circuits";
