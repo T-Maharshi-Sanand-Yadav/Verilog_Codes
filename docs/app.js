@@ -11,6 +11,12 @@ const githubLink = document.getElementById("github-link");
 const pageTitle = document.getElementById("pageTitle");
 const searchInput = document.getElementById("searchInput");
 const categoryGrid = document.getElementById("categoryGrid");
+const queryParams = new URLSearchParams(window.location.search);
+const selectedGroupParam = queryParams.get("group");
+
+function normalizeGroupName(value) {
+  return decodeURIComponent(value || '').trim();
+}
 
 function toDisplayGroup(path) {
   const top = path.split('/')[0];
@@ -56,8 +62,14 @@ function loadRepositoryTree() {
 
       populateGroups();
       renderCategoryCards();
+
       const firstGroup = Object.keys(fileGroups)[0];
-      if (firstGroup) populateFiles(firstGroup);
+      const requestedGroup = normalizeGroupName(selectedGroupParam);
+      const preferredGroup = requestedGroup && fileGroups[requestedGroup] ? requestedGroup : firstGroup;
+      if (preferredGroup) {
+        groupSelect.value = preferredGroup;
+        populateFiles(preferredGroup);
+      }
 
       groupSelect.addEventListener("change", (event) => {
         populateFiles(event.target.value);
@@ -113,14 +125,10 @@ function renderCategoryCards(query = "") {
     const matchingFiles = fileGroups[group].filter((file) => file.name.toLowerCase().includes(normalized));
     if (normalized && matchingFiles.length === 0) return;
 
-    const card = document.createElement("button");
+    const card = document.createElement("a");
     card.className = "category-card";
-    card.type = "button";
+    card.href = `browse.html?group=${encodeURIComponent(group)}`;
     card.innerHTML = `<strong>${group}</strong><span>${matchingFiles.length || fileGroups[group].length} files</span>`;
-    card.addEventListener("click", () => {
-      populateFiles(group);
-      groupSelect.value = group;
-    });
     categoryGrid.appendChild(card);
   });
 }
