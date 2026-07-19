@@ -1,0 +1,17 @@
+{
+  "Logic & Basic Circuits": [
+    { "name": "MULTIPLEXER.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/MULTIPLEXER.v" },
+    { "name": "Comparators.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/Comparators.v" },
+    { "name": "buffer.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/buffer.v" }
+  ],
+  "Sequential Circuits": [
+    { "name": "moore_0100_sequence.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/moore_0100_sequence.v" },
+    { "name": "vending_machine_controller.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/vending_machine_controller.v" },
+    { "name": "Shift_Registers.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/Shift_Registers.v" }
+  ],
+  "Advanced RTL": [
+    { "name": "fulladder.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/combinational_circuits/fulladder.v" },
+    { "name": "halfadder.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/combinational_circuits/halfadder.v" },
+    { "name": "riscv_alu.v", "path": "https://raw.githubusercontent.com/T-Maharshi-Sanand-Yadav/Verilog_Codes/main/ps_verilog/riscv_alu.v" }
+  ]
+}
