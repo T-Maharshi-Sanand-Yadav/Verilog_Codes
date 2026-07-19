@@ -9,13 +9,14 @@ const codeOutput = document.getElementById("codeOutput");
 const currentFileLabel = document.getElementById("currentFileLabel");
 const githubLink = document.getElementById("github-link");
 const pageTitle = document.getElementById("pageTitle");
+const searchInput = document.getElementById("searchInput");
+const categoryGrid = document.getElementById("categoryGrid");
 
 function toDisplayGroup(path) {
   const top = path.split('/')[0];
   if (top === 'logic_gates') return 'Logic Gates';
   if (top === 'combinational_circuits') return 'Combinational Circuits';
   if (top === 'ps_verilog') return 'PS Verilog';
-  if (top === 'logic_gates') return 'Logic Gates';
   if (path.includes('Flip Flops Positive Edge Trigger If-Else.v')) return 'Sequential Circuits';
   if (path.startsWith('combinational_circuits/')) return 'Combinational Circuits';
   if (path.startsWith('logic_gates/')) return 'Logic Gates';
@@ -54,6 +55,7 @@ function loadRepositoryTree() {
       });
 
       populateGroups();
+      renderCategoryCards();
       const firstGroup = Object.keys(fileGroups)[0];
       if (firstGroup) populateFiles(firstGroup);
 
@@ -65,6 +67,20 @@ function loadRepositoryTree() {
         const selected = fileGroups[groupSelect.value].find((file) => file.path === event.target.value);
         if (selected) loadCode(selected.path, selected.name, selected.githubPath);
       });
+
+      searchInput.addEventListener("input", (event) => {
+        const query = event.target.value.toLowerCase();
+        renderCategoryCards(query);
+        const matchingGroups = Object.keys(fileGroups).filter((group) => {
+          const matches = fileGroups[group].some((file) => file.name.toLowerCase().includes(query));
+          return matches;
+        });
+        if (matchingGroups.length > 0) {
+          populateGroups(matchingGroups);
+        } else {
+          populateGroups(Object.keys(fileGroups));
+        }
+      });
     })
     .catch(() => {
       if (codeOutput) {
@@ -73,14 +89,39 @@ function loadRepositoryTree() {
     });
 }
 
-function populateGroups() {
-  const groups = Object.keys(fileGroups);
+function populateGroups(filteredGroups = Object.keys(fileGroups)) {
   groupSelect.innerHTML = "";
-  groups.forEach((group) => {
+  filteredGroups.forEach((group) => {
     const option = document.createElement("option");
     option.value = group;
     option.textContent = group;
     groupSelect.appendChild(option);
+  });
+
+  const selectedGroup = filteredGroups[0];
+  if (selectedGroup) populateFiles(selectedGroup);
+}
+
+function renderCategoryCards(query = "") {
+  if (!categoryGrid) return;
+  categoryGrid.innerHTML = "";
+
+  const normalized = query.trim().toLowerCase();
+  const groups = Object.keys(fileGroups);
+
+  groups.forEach((group) => {
+    const matchingFiles = fileGroups[group].filter((file) => file.name.toLowerCase().includes(normalized));
+    if (normalized && matchingFiles.length === 0) return;
+
+    const card = document.createElement("button");
+    card.className = "category-card";
+    card.type = "button";
+    card.innerHTML = `<strong>${group}</strong><span>${matchingFiles.length || fileGroups[group].length} files</span>`;
+    card.addEventListener("click", () => {
+      populateFiles(group);
+      groupSelect.value = group;
+    });
+    categoryGrid.appendChild(card);
   });
 }
 
@@ -112,10 +153,21 @@ function loadCode(path, name, githubPath) {
     })
     .then((text) => {
       codeOutput.textContent = text;
+      if (window.hljs) {
+        codeOutput.innerHTML = `<code class="verilog">${escapeHtml(text)}</code>`;
+        window.hljs.highlightElement(codeOutput.querySelector("code"));
+      }
     })
     .catch(() => {
       codeOutput.textContent = "This file could not be loaded from the website at the moment.";
     });
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 function initViewer() {
