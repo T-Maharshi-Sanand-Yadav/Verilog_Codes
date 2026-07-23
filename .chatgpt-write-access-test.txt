@@ -1,0 +1,1 @@
+ChatGPT direct write access test. Safe temporary file; can be removed after verification.
