@@ -1,165 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Verilog Codes - RTL Examples and VLSI Practice</title>
-  <meta name="description" content="Browse Verilog HDL examples, RTL modules, combinational circuits, sequential circuits, testbenches, and VLSI practice files directly on GitHub Pages." />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verilog Codes | Learn Digital Design & RTL</title>
+<meta name="description" content="Explore practical Verilog HDL examples, digital circuit simulations, sequential logic, processor blocks and VLSI learning resources.">
+<meta name="theme-color" content="#0b1020">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#10182b;--muted:#62708a;--navy:#0b1020;--navy2:#111b32;--teal:#43e0c0;--line:#e4eaf2;--paper:#f5f8fc;--white:#fff}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",Arial,sans-serif}a{color:inherit;text-decoration:none}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}.topbar{position:sticky;top:0;z-index:10;background:rgba(11,16,32,.94);backdrop-filter:blur(14px);border-bottom:1px solid #ffffff16}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:22px;color:#fff}.brand{display:flex;align-items:center;gap:11px;font:700 1.08rem "Space Grotesk",sans-serif;white-space:nowrap}.brand-mark{display:grid;place-items:center;width:37px;height:37px;border-radius:12px;background:var(--teal);color:#071b24;font-weight:700}.navlinks{display:flex;align-items:center;gap:24px;color:#c3cde0;font-size:.9rem}.navlinks a:hover{color:var(--teal)}.navlinks .nav-cta{padding:10px 15px;border-radius:10px;background:#ffffff12;color:#fff;border:1px solid #ffffff22}.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 80% 15%,#204d6070,transparent 36%),radial-gradient(ellipse at 10% 90%,#124a4b50,transparent 38%),var(--navy);color:#fff;padding:86px 0 82px}.hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(#9db5d61b 1px,transparent 1px),linear-gradient(90deg,#9db5d61b 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(90deg,black,transparent)}.hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:65px}.eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 18px;color:var(--teal);font-size:.75rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}.eyebrow:before{content:"";width:23px;height:2px;background:var(--teal)}h1,h2,h3{font-family:"Space Grotesk",sans-serif}h1{max-width:690px;margin:0;font-size:clamp(2.8rem,5.5vw,4.8rem);line-height:1.02;letter-spacing:-.055em}h1 span{color:var(--teal)}.hero-copy>p:not(.eyebrow){max-width:630px;margin:22px 0 0;color:#bac6da;font-size:1.08rem;line-height:1.75}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 19px;border-radius:11px;font-size:.92rem;font-weight:700;transition:transform .18s,background .18s,border .18s}.btn:hover{transform:translateY(-2px)}.btn-main{background:var(--teal);color:#082126}.btn-main:hover{background:#6af0d4}.btn-outline{border:1px solid #ffffff35;color:#fff;background:#ffffff08}.btn-outline:hover{border-color:var(--teal)}.hero-foot{display:flex;flex-wrap:wrap;gap:18px;margin-top:29px;color:#aebbd0;font-size:.84rem}.hero-foot span{display:flex;align-items:center;gap:8px}.dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}.visual{position:relative;min-width:0}.code-card{position:relative;padding:20px;border:1px solid #ffffff20;border-radius:18px;background:linear-gradient(145deg,#17233d,#0e172b);box-shadow:0 28px 80px #0006;transform:rotate(1deg)}.code-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:15px;border-bottom:1px solid #ffffff12;color:#9babc5;font-size:.77rem}.lights{display:flex;gap:6px}.lights i{width:7px;height:7px;border-radius:50%;background:#66758e}.code-body{padding:20px 4px 6px;font: .85rem/1.95 ui-monospace,SFMono-Regular,Consolas,monospace;color:#d9e6f8;white-space:pre}.kw{color:#65c7f3}.fn{color:#65e5c5}.num{color:#f5c779}.comment{color:#8293ad}.wave-card{position:absolute;right:-26px;bottom:-37px;width:78%;padding:14px 16px;border:1px solid #ffffff20;border-radius:14px;background:#17233df2;box-shadow:0 16px 38px #0005}.wave-title{display:flex;justify-content:space-between;color:#c2cee1;font-size:.72rem;margin-bottom:9px}.wave-title b{color:var(--teal)}.wave-card svg{display:block;width:100%;height:auto}.section{padding:76px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:25px;margin-bottom:27px}.kicker{margin:0 0 9px;color:#078c7b;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.section-head h2,.split h2{margin:0;font-size:clamp(1.8rem,3vw,2.65rem);letter-spacing:-.04em;line-height:1.12}.section-head>p{max-width:390px;margin:0;color:var(--muted);line-height:1.65;font-size:.94rem}.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.feature{display:flex;flex-direction:column;min-height:220px;padding:23px;border:1px solid var(--line);border-radius:15px;background:#fff;box-shadow:0 5px 18px #172c4c08;transition:transform .2s,border .2s,box-shadow .2s}.feature:hover{transform:translateY(-4px);border-color:#9ddbd1;box-shadow:0 16px 35px #172c4c10}.feature-icon{display:grid;place-items:center;width:43px;height:43px;margin-bottom:20px;border-radius:13px;background:#e7f8f4;color:#087f72;font-size:1.15rem;font-weight:800}.feature h3{margin:0 0 9px;font-size:1.08rem}.feature p{margin:0 0 20px;color:var(--muted);font-size:.9rem;line-height:1.65}.feature a{margin-top:auto;color:#087f72;font-size:.87rem;font-weight:800}.feature a span{margin-left:5px}.stats-band{padding:26px 0;background:#eaf1f8;border-top:1px solid #e2e9f2;border-bottom:1px solid #e2e9f2}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.stat{display:flex;align-items:center;justify-content:center;gap:12px;text-align:left}.stat strong{font:700 1.55rem "Space Grotesk",sans-serif;color:#0d766d}.stat span{max-width:110px;color:#5f6d82;font-size:.8rem;line-height:1.35}.split-section{background:#101a30;color:#fff}.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.split p:not(.kicker){color:#b6c3d8;line-height:1.75}.split .kicker{color:var(--teal)}.resource-list{display:grid;gap:10px}.resource{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:15px 17px;border:1px solid #ffffff1b;border-radius:12px;background:#ffffff08}.resource:hover{border-color:#43e0c080;background:#ffffff0e}.resource strong{display:block;font-size:.9rem}.resource small{display:block;margin-top:4px;color:#a9b7cd;font-size:.78rem}.resource .arrow{color:var(--teal);font-size:1.15rem}.social{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.social a{padding:10px 13px;border:1px solid #ffffff20;border-radius:9px;color:#d6e0f0;font-size:.83rem}.social a:hover{border-color:var(--teal);color:var(--teal)}footer{padding:23px 0;background:#080d19;color:#aab6ca;font-size:.8rem}.foot{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}.foot-links{display:flex;gap:17px;flex-wrap:wrap}.foot a:hover{color:var(--teal)}@media(max-width:850px){.hero-grid{grid-template-columns:1fr;gap:52px}.visual{max-width:570px;width:90%;margin:0 auto}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.split{gap:32px}}@media(max-width:600px){.wrap{width:min(100% - 28px,1160px)}.nav{padding:12px 0;align-items:flex-start;flex-direction:column;gap:12px}.navlinks{width:100%;gap:8px;overflow-x:auto;padding-bottom:2px;white-space:nowrap}.navlinks a{font-size:.8rem}.navlinks .nav-cta{padding:7px 10px}.hero{padding:63px 0 75px}.hero-grid{gap:42px}h1{font-size:clamp(2.55rem,12vw,3.55rem)}.hero-copy>p:not(.eyebrow){font-size:.98rem}.visual{width:95%}.code-card{padding:15px}.code-body{font-size:.7rem}.wave-card{right:-9px;bottom:-31px;width:83%}.section{padding:56px 0}.section-head{display:block}.section-head>p{margin-top:12px}.feature-grid{grid-template-columns:1fr}.feature{min-height:0}.feature-icon{margin-bottom:14px}.stats{gap:7px}.stat{flex-direction:column;gap:3px;text-align:center}.stat strong{font-size:1.35rem}.stat span{font-size:.7rem}.split{grid-template-columns:1fr;gap:26px}.foot{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <nav class="nav container" aria-label="Main navigation">
-      <a class="brand" href="index.html">Verilog_Codes</a>
-      <div class="nav-links">
-        <a href="browse.html">Browse</a>
-        <a href="clock-divider/">Clock Divider</a>
-        <a href="simulations/">Circuit Lab</a>
-        <a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://www.youtube.com/@maharshisanandyadav" target="_blank" rel="noreferrer">YouTube</a>
-      </div>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero">
-      <div class="container hero-layout">
-        <div class="hero-copy">
-          <p class="eyebrow">VLSI • RTL • Verilog HDL</p>
-          <h1>Readable Verilog examples for digital design practice</h1>
-          <p class="subtitle">
-            Explore logic gates, adders, subtractors, flip-flops, counters, state machines,
-            RISC-V practice blocks, SHA-256 RTL, and testbenches directly from this website.
-          </p>
-          <div class="actions">
-            <a class="btn primary" href="browse.html">Browse Code</a>
-            <a class="btn secondary" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">Open Repository</a>
-          </div>
-          <div class="social-row" aria-label="Maharshi social links">
-            <a href="https://www.youtube.com/@maharshisanandyadav" target="_blank" rel="noreferrer">YouTube</a>
-            <a href="https://www.linkedin.com/newsletters/verilog-codes-7361018890564366337" target="_blank" rel="noreferrer">LinkedIn Newsletter</a>
-            <a href="https://www.instagram.com/vlsi.tmsy.tutorials" target="_blank" rel="noreferrer">Instagram</a>
-            <a href="https://www.tmsytutorials.com" target="_blank" rel="noreferrer">TMSY Tutorials</a>
-          </div>
-        </div>
-
-        <aside class="hero-panel" aria-label="Repository summary">
-          <div class="panel-row">
-            <span>Total source files</span>
-            <strong id="totalFiles">Loading...</strong>
-          </div>
-          <div class="panel-row">
-            <span>Detected testbenches</span>
-            <strong id="testbenchCount">Loading...</strong>
-          </div>
-          <div class="panel-row">
-            <span>Main categories</span>
-            <strong id="categoryCount">Loading...</strong>
-          </div>
-          <a class="mini-link" href="browse.html">Open live catalog</a>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section-band">
-      <div class="container">
-        <div class="section-heading">
-          <p class="section-tag">Learning path</p>
-          <h2>Start from gates, move toward larger RTL blocks</h2>
-        </div>
-
-        <div class="grid feature-grid">
-          <article class="card">
-            <h3>Logic Gates</h3>
-            <p>AND, OR, NOT, NAND, NOR, XOR, and XNOR designs with modelling styles and testbenches.</p>
-            <a href="browse.html?group=Logic%20Gates">Browse logic gates</a>
-          </article>
-
-          <article class="card">
-            <h3>Combinational Circuits</h3>
-            <p>Half adders, full adders, subtractors, carry lookahead adders, ripple carry adders, and encoders.</p>
-            <a href="browse.html?group=Combinational%20Circuits">Browse combinational RTL</a>
-          </article>
-
-          <article class="card">
-            <h3>Sequential Circuits</h3>
-            <p>Flip-flops, counters, shift registers, and finite-state-machine examples for clocked design.</p>
-            <a href="browse.html?group=Sequential%20Circuits">Browse sequential RTL</a>
-          </article>
-
-          <article class="card">
-            <h3>Interactive Circuit Lab</h3>
-            <p>Change logic inputs, step clocked circuits, and explore outputs for gates, adders, multiplexers, flip-flops, counters, and an FSM.</p>
-            <a href="simulations/">Open interactive lab</a>
-          </article>
-
-          <article class="card">
-            <h3>Processor Practice</h3>
-            <p>RISC-V blocks, APB timer examples, SHA-256 modules, and timing-path practice files.</p>
-            <a href="browse.html?group=PS%20Verilog">Browse PS Verilog</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-band muted-band">
-      <div class="container split-layout">
-        <div>
-          <p class="section-tag">Code browser</p>
-          <h2>Read source files without leaving the site</h2>
-          <p class="subtitle compact">
-            The browser page builds a live catalog from the repository tree, supports file-name search,
-            and opens each Verilog file with syntax highlighting and a GitHub source link.
-          </p>
-          <div class="actions">
-            <a class="btn primary" href="browse.html">Open Browse Page</a>
-          </div>
-        </div>
-
-        <div class="quick-list" aria-label="Popular examples">
-          <a href="viewer.html?file=fulladder.v">fulladder.v</a>
-          <a href="viewer.html?file=counter.v">counter.v</a>
-          <a href="viewer.html?file=riscv_alu.v">riscv_alu.v</a>
-          <a href="viewer.html?file=sha256_core.v">sha256_core.v</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-band social-band">
-      <div class="container social-panel">
-        <div>
-          <p class="section-tag">Follow for more VLSI content</p>
-          <h2>Learn Verilog, STA, synthesis, and standard cell characterization</h2>
-          <p class="subtitle compact">
-            Follow my channels for tutorials, notes, examples, and updates when new repository content is added.
-          </p>
-        </div>
-        <div class="social-grid" aria-label="Social and learning links">
-          <a href="https://www.youtube.com/@maharshisanandyadav" target="_blank" rel="noreferrer"><strong>YouTube</strong><span>Video tutorials and walkthroughs</span></a>
-          <a href="https://youtube.com/playlist?list=PLS8qCSk3htIIKeumRz1CwcW9sIkLiUJlv" target="_blank" rel="noreferrer"><strong>Characterization Playlist</strong><span>Standard cell characterization series</span></a>
-          <a href="https://www.linkedin.com/newsletters/verilog-codes-7361018890564366337" target="_blank" rel="noreferrer"><strong>LinkedIn Newsletter</strong><span>Verilog Codes updates</span></a>
-          <a href="https://www.instagram.com/vlsi.tmsy.tutorials" target="_blank" rel="noreferrer"><strong>Instagram</strong><span>Short VLSI learning posts</span></a>
-          <a href="https://www.tmsytutorials.com" target="_blank" rel="noreferrer"><strong>Website</strong><span>TMSY Tutorials</span></a>
-          <a href="https://github.com/T-Maharshi-Sanand-Yadav" target="_blank" rel="noreferrer"><strong>GitHub</strong><span>More repositories and examples</span></a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>Created for Verilog and VLSI learners.</span>
-      <div class="footer-links">
-        <a href="https://github.com/T-Maharshi-Sanand-Yadav" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://www.youtube.com/@maharshisanandyadav" target="_blank" rel="noreferrer">YouTube</a>
-        <a href="https://youtube.com/playlist?list=PLS8qCSk3htIIKeumRz1CwcW9sIkLiUJlv" target="_blank" rel="noreferrer">Playlist</a>
-        <a href="https://www.linkedin.com/newsletters/verilog-codes-7361018890564366337" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://www.instagram.com/vlsi.tmsy.tutorials" target="_blank" rel="noreferrer">Instagram</a>
-        <a href="https://www.tmsytutorials.com" target="_blank" rel="noreferrer">Website</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<header class="topbar"><nav class="nav wrap" aria-label="Main navigation"><a class="brand" href="index.html"><span class="brand-mark">V</span><span>Verilog Codes</span></a><div class="navlinks"><a href="#learn">Explore</a><a href="browse.html">Browse Code</a><a href="simulations/">Circuit Lab</a><a href="clock-divider/">Clock Divider</a><a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer" class="nav-cta">GitHub ↗</a></div></nav></header>
+<main>
+<section class="hero"><div class="wrap hero-grid"><div class="hero-copy"><p class="eyebrow">Verilog HDL · Digital Design · VLSI</p><h1>Build your digital design skills, <span>one circuit at a time.</span></h1><p>A practical collection of Verilog RTL examples, testbenches, and interactive circuit explorations—from fundamental logic gates to larger digital systems.</p><div class="actions"><a class="btn btn-main" href="browse.html">Explore Verilog Code <span>→</span></a><a class="btn btn-outline" href="simulations/">Open Circuit Lab ↗</a></div><div class="hero-foot"><span><i class="dot"></i> Learn by exploring RTL</span><span><i class="dot"></i> Interactive logic examples</span><span><i class="dot"></i> Free learning resource</span></div></div><div class="visual"><div class="code-card"><div class="code-top"><span>counter.v</span><span class="lights"><i></i><i></i><i></i></span></div><div class="code-body"><span class="comment">// 4-bit synchronous counter</span>
+<span class="kw">module</span> counter4(
+  <span class="kw">input</span> clk, reset,
+  <span class="kw">output reg</span> [3:0] count
+);
+  <span class="kw">always</span> @(<span class="fn">posedge</span> clk) begin
+    <span class="kw">if</span> (reset)
+      count &lt;= <span class="num">4'b0000</span>;
+    <span class="kw">else</span>
+      count &lt;= count + <span class="num">1'b1</span>;
+  <span class="kw">end</span>
+<span class="kw">endmodule</span></div></div><div class="wave-card"><div class="wave-title"><span>Digital timing · concept</span><b>CLK / Q</b></div><svg viewBox="0 0 300 76" role="img" aria-label="Illustrative clock and output waveforms"><path d="M0 13 H20 V3 H50 V13 H80 V3 H110 V13 H140 V3 H170 V13 H200 V3 H230 V13 H260 V3 H290 V13" fill="none" stroke="#56b9f5" stroke-width="2.3" stroke-linejoin="round"/><path d="M0 48 H50 V38 H110 V48 H170 V38 H230 V48 H290" fill="none" stroke="#43e0c0" stroke-width="2.3" stroke-linejoin="round"/><g fill="#9fb0c8" font-size="9"><text x="3" y="28">CLK</text><text x="3" y="63">Q</text></g></svg></div></div></div></section>
+<section class="stats-band"><div class="wrap stats"><div class="stat"><strong id="totalFiles">…</strong><span>Verilog source files</span></div><div class="stat"><strong id="testbenchCount">…</strong><span>Detected testbenches</span></div><div class="stat"><strong id="categoryCount">…</strong><span>Learning categories</span></div></div></section>
+<section class="section" id="learn"><div class="wrap"><div class="section-head"><div><p class="kicker">Explore the collection</p><h2>Choose what you want to learn</h2></div><p>Start with the basics, explore how circuits behave, then move toward RTL blocks and system-level examples.</p></div><div class="feature-grid">
+<article class="feature"><div class="feature-icon">⌁</div><h3>Logic Gates</h3><p>Understand AND, OR, NOT, NAND, NOR, XOR, and XNOR using concise Verilog examples and testbenches.</p><a href="browse.html?group=Logic%20Gates">Explore logic gates <span>→</span></a></article>
+<article class="feature"><div class="feature-icon">⊕</div><h3>Combinational Circuits</h3><p>Practice adders, subtractors, multiplexers, encoders, decoders, and other combinational building blocks.</p><a href="browse.html?group=Combinational%20Circuits">Explore combinational RTL <span>→</span></a></article>
+<article class="feature"><div class="feature-icon">◷</div><h3>Sequential Circuits</h3><p>Explore flip-flops, counters, shift registers, and FSMs with clocked RTL and state behavior.</p><a href="browse.html?group=Sequential%20Circuits">Explore sequential RTL <span>→</span></a></article>
+<article class="feature"><div class="feature-icon">▤</div><h3>Interactive Circuit Lab</h3><p>Change inputs, step through clocked circuits, and inspect logic equations, tables, and illustrative waveforms.</p><a href="simulations/">Enter Circuit Lab <span>→</span></a></article>
+<article class="feature"><div class="feature-icon">⌘</div><h3>Processor & RTL Practice</h3><p>Browse RISC-V components, ALU examples, APB timer designs, and other larger RTL exercises.</p><a href="browse.html?group=PS%20Verilog">Explore RTL blocks <span>→</span></a></article>
+<article class="feature"><div class="feature-icon">⌁</div><h3>Timing & Special Topics</h3><p>Find examples such as clock dividers and SHA-256 RTL, and use them for further design exploration.</p><a href="browse.html">Browse all examples <span>→</span></a></article>
+</div></div></section>
+<section class="section split-section"><div class="wrap split"><div><p class="kicker">Your workspace</p><h2>Find code. Understand behavior. Keep learning.</h2><p>Use the browser to search repository files, open source code, and follow the examples at your own pace. Interactive pages help connect RTL descriptions with circuit behavior.</p><div class="actions"><a class="btn btn-main" href="browse.html">Browse all files →</a></div><div class="social"><a href="https://www.youtube.com/@maharshisanandyadav" target="_blank" rel="noreferrer">YouTube tutorials ↗</a><a href="https://www.instagram.com/vlsi.tmsy.tutorials" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.linkedin.com/newsletters/verilog-codes-7361018890564366337" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div><div class="resource-list"><a class="resource" href="clock-divider/"><span><strong>Clock Divider Simulator</strong><small>Explore a divide-by-2 clock design</small></span><span class="arrow">↗</span></a><a class="resource" href="simulations/"><span><strong>Digital Circuit Lab</strong><small>Interactive logic and sequential circuits</small></span><span class="arrow">↗</span></a><a class="resource" href="viewer.html?file=fulladder.v"><span><strong>Full Adder RTL</strong><small>Open a source example</small></span><span class="arrow">↗</span></a><a class="resource" href="viewer.html?file=counter.v"><span><strong>Counter RTL</strong><small>Inspect a sequential design</small></span><span class="arrow">↗</span></a><a class="resource" href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer"><span><strong>GitHub Repository</strong><small>View source files and contributions</small></span><span class="arrow">↗</span></a></div></div></section>
+</main><footer><div class="wrap foot"><span>Verilog Codes · A learning resource for digital design and VLSI</span><div class="foot-links"><a href="browse.html">Browse</a><a href="simulations/">Circuit Lab</a><a href="https://www.youtube.com/@maharshisanandyadav" target="_blank" rel="noreferrer">YouTube</a><a href="https://www.tmsytutorials.com" target="_blank" rel="noreferrer">TMSY Tutorials</a></div></div></footer><script src="app.js"></script>
+</body></html>
