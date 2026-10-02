@@ -17,8 +17,21 @@ code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}pre{backgrou
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.step{padding:12px;background:#f5f8fc;border-radius:10px;font-size:13px;line-height:1.5}
 footer{text-align:center;color:#78859a;font-size:12px;padding:16px}
 @media(max-width:600px){body{padding:16px 10px}.panel{padding:15px}.metrics{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}pre{font-size:11px;padding:12px}}
+
+.site-header{position:sticky;top:0;z-index:20;margin:-24px -14px 18px;padding:0 14px;background:rgba(11,18,32,.96);border-bottom:1px solid #273650;backdrop-filter:blur(12px)}
+.site-nav{max-width:960px;min-height:58px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.site-brand{color:#f7fafc;text-decoration:none;font-weight:800}
+.site-links{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.site-links a{color:#cbd5e1;text-decoration:none;font-size:13px;padding:8px 10px;border-radius:8px}
+.site-links a:hover,.site-links a[aria-current=page]{background:#203047;color:white}
+@media(max-width:600px){.site-header{margin:-16px -10px 14px}.site-nav{align-items:flex-start;flex-direction:column;padding:10px 0}.site-links{justify-content:flex-start;width:100%}.site-links a{border:1px solid #34445b;padding:7px 9px}}
 </style></head>
-<body><main class="wrap">
+<body>
+<header class="site-header"><nav class="site-nav" aria-label="Main navigation">
+<a class="site-brand" href="../index.html">Verilog_Codes</a>
+<div class="site-links"><a href="../index.html">Home</a><a href="../browse.html">Browse</a><a href="./" aria-current="page">Clock Divider</a><a href="https://github.com/T-Maharshi-Sanand-Yadav/Verilog_Codes" target="_blank" rel="noreferrer">GitHub</a></div>
+</nav></header>
+<main class="wrap">
 <header><div class="eyebrow">TMSY VLSI Tutorials · Interactive learning</div><h1>Divide-by-2 Clock Divider</h1><p>Explore how a single toggle flip-flop converts an input clock into an output clock with half the frequency. Step through rising edges and watch the waveform update.</p></header>
 <section class="panel"><h2>Live simulator</h2><div class="controls"><label for="freq">Input frequency: <b id="freqText">100 MHz</b></label><input id="freq" type="range" min="10" max="200" step="10" value="100"><button id="pulse">↑ Clock pulse</button><button id="reset" class="secondary">↺ Reset</button></div>
 <div class="metrics"><div class="metric"><small>Rising edges</small><strong id="edges">0</strong></div><div class="metric"><small>Output Q</small><strong id="q">0 · LOW</strong></div><div class="metric"><small>Output frequency</small><strong id="outFreq">50 MHz</strong></div><div class="metric"><small>Output period</small><strong id="outPeriod">20 ns</strong></div></div>
