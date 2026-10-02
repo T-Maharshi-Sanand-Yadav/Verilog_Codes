@@ -49,12 +49,35 @@ endmodule</code></pre><p>On reset, output is cleared. Otherwise, each rising edg
 <script>
 const $=id=>document.getElementById(id);let edges=0,q=0,history=[0],freq=100;
 function fmt(n){return Number.isInteger(n)?String(n):n.toFixed(2)}
-function draw(){const svg=$('wave'),W=720,left=82,right=700,step=(right-left)/8,topH=40,lowH=65,outHi=112,outLo=145;let s='';
-for(let i=0;i<=8;i++){let x=left+i*step;s+=`<line x1="${x}" y1="16" x2="${x}" y2="168" stroke="#94a3b8" stroke-opacity=".25" stroke-dasharray="3 4"/><text x="${x}" y="190" text-anchor="middle" font-size="11" fill="#64748b">${fmt(i*1000/freq)} ns</text>`}
-s+='<text x="8" y="43" font-size="13" fill="#1d4ed8" font-weight="700">clk</text><text x="8" y="115" font-size="13" fill="#166534" font-weight="700">Q</text>';
-let p=`M ${left} ${topH}`;for(let i=0;i<8;i++){let x=left+i*step;p+=` H ${x+step/2} V ${lowH} H ${x+step} V ${topH}`;}s+=`<path d="${p}" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>`;
-let op=`M ${left} ${q===0?outLo:outHi}`;let qtemp=0;for(let i=0;i<8;i++){let x=left+i*step;op+=` H ${x+step} V ${qtemp===0?outHi:outLo}`;qtemp=1-qtemp;}s+=`<path d="${op}" fill="none" stroke="#16a34a" stroke-width="2.8" stroke-linejoin="round"/>`;
-let markerX=left+Math.min(edges,8)*step;s+=`<line x1="${markerX}" x2="${markerX}" y1="10" y2="165" stroke="#e59b25" stroke-width="2" stroke-dasharray="5 4"/>`;svg.innerHTML=s;
-$('edges').textContent=edges;$('q').textContent=q+' · '+(q?'HIGH':'LOW');$('outFreq').textContent=fmt(freq/2)+' MHz';$('outPeriod').textContent=fmt(2000/freq)+' ns';$('freqText').textContent=freq+' MHz';$('blockIn').textContent=freq+' MHz';$('blockOut').textContent=fmt(freq/2)+' MHz';$('explain').textContent=edges===0?'Reset state: Q = 0. Press “Clock pulse” to apply one rising edge.':`After ${edges} input rising edge(s), Q = ${q}. Output toggles on every rising edge; full output period = two input periods.`;$('pulse').disabled=edges>=8;}
+function draw(){
+ const svg=$('wave'),left=82,right=700,cycles=8,step=(right-left)/cycles;
+ const clkHigh=40,clkLow=65,qHigh=112,qLow=145;let s='';
+ for(let i=0;i<=cycles;i++){
+   const x=left+i*step;
+   s+=`<line x1="${x}" y1="16" x2="${x}" y2="168" stroke="#94a3b8" stroke-opacity=".25" stroke-dasharray="3 4"/><text x="${x}" y="190" text-anchor="middle" font-size="11" fill="#64748b">${fmt(i*1000/freq)} ns</text>`;
+ }
+ s+='<text x="8" y="43" font-size="13" fill="#1d4ed8" font-weight="700">clk</text><text x="8" y="115" font-size="13" fill="#166534" font-weight="700">Q</text>';
+ // Input clock starts LOW; each cycle has a rising edge at its midpoint.
+ let cp=`M ${left} ${clkLow}`;
+ for(let i=0;i<cycles;i++){
+   const x=left+i*step,mid=x+step/2,next=x+step;
+   cp+=` H ${mid} V ${clkHigh} H ${next} V ${clkLow}`;
+ }
+ s+=`<path d="${cp}" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linejoin="round"/>`;
+ // Q toggles exactly at each input rising edge and holds between edges.
+ let qp=`M ${left} ${qLow}`,state=0;
+ for(let i=0;i<cycles;i++){
+   const x=left+i*step,mid=x+step/2,next=x+step;
+   qp+=` H ${mid} V ${state===0?qHigh:qLow}`;
+   state=1-state;
+   qp+=` H ${next}`;
+ }
+ s+=`<path d="${qp}" fill="none" stroke="#16a34a" stroke-width="2.8" stroke-linejoin="round"/>`;
+ // Marker tracks the most recently applied edge (or first edge before stepping).
+ const markerX=edges===0?left+step/2:Math.min(right,left+(edges-1)*step+step/2);
+ s+=`<line x1="${markerX}" x2="${markerX}" y1="10" y2="165" stroke="#e59b25" stroke-width="2" stroke-dasharray="5 4"/>`;
+ svg.innerHTML=s;
+ $('edges').textContent=edges;$('q').textContent=q+' · '+(q?'HIGH':'LOW');$('outFreq').textContent=fmt(freq/2)+' MHz';$('outPeriod').textContent=fmt(2000/freq)+' ns';$('freqText').textContent=freq+' MHz';$('blockIn').textContent=freq+' MHz';$('blockOut').textContent=fmt(freq/2)+' MHz';$('explain').textContent=edges===0?'Reset state: Q = 0. The first rising edge will set Q to 1.':`After ${edges} input rising edge(s), Q = ${q}. Q toggles once at each rising edge; one full output cycle takes two input cycles.`;$('pulse').disabled=edges>=8;
+}
 $('pulse').addEventListener('click',()=>{edges++;q=1-q;history.push(q);draw()});$('reset').addEventListener('click',()=>{edges=0;q=0;history=[0];draw()});$('freq').addEventListener('input',e=>{freq=+e.target.value;draw()});draw();
 </script></body></html>
