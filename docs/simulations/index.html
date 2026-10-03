@@ -61,8 +61,8 @@ function testbenchFor(it){
   return common(it.id+"_gate",decl,ports,stim);
  }
  case "half":return common("half_adder","reg A,B; wire Sum,Carry;",".A(A), .B(B), .Sum(Sum), .Carry(Carry)","  {A,B}=2'b00; #10; {A,B}=2'b01; #10; {A,B}=2'b10; #10; {A,B}=2'b11; #10;");
- case "full":return common("full_adder","reg A,B,Cin; wire Sum,Cout;",".A(A), .B(B), .Cin(Cin), .Sum(Sum), .Cout(Cout)","  for(integer i=0;i<8;i=i+1) begin {A,B,Cin}=i; #10; end");
- case "mux":return common("mux4","reg [3:0] D; reg [1:0] S; wire Y;",".D(D), .S(S), .Y(Y)","  D=4'b1010; for(integer i=0;i<4;i=i+1) begin S=i; #10; end");
+ case "full":return common("full_adder","reg A,B,Cin; wire Sum,Cout; integer i;",".A(A), .B(B), .Cin(Cin), .Sum(Sum), .Cout(Cout)","  for(i=0;i<8;i=i+1) begin {A,B,Cin}=i; #10; end");
+ case "mux":return common("mux4","reg [3:0] D; reg [1:0] S; wire Y; integer i;",".D(D), .S(S), .Y(Y)","  D=4'b1010; for(i=0;i<4;i=i+1) begin S=i; #10; end");
  case "dff":return common("dff","reg clk,D; wire Q;",".clk(clk), .D(D), .Q(Q)","  clk=0; D=0; #5; clk=1; #5; clk=0; D=1; #5; clk=1; #5; clk=0;");
  case "counter":return common("counter4","reg clk,reset; wire [3:0] count;",".clk(clk), .reset(reset), .count(count)","  clk=0; reset=1; #10; reset=0; repeat(5) begin #5; clk=1; #5; clk=0; end");
  case "fsm":return common("seq_detector","reg clk,reset,bit_in; wire detect;",".clk(clk), .reset(reset), .bit_in(bit_in), .detect(detect)","  clk=0; reset=1; bit_in=0; #10; reset=0; bit_in=1; #5; clk=1; #5; clk=0; bit_in=0; #5; clk=1; #5; clk=0; bit_in=1; #5; clk=1; #5; clk=0;");
